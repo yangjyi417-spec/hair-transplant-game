@@ -394,6 +394,7 @@
 
   function judge(nx,ny){
     if(!surgery)return;const c=surgery.cust;if(surgery.filled>=c.need)return;
+    if(S.fol<=0){toast("毛囊用完啦，先去采发再种","bad");return;}
     const W=el.stage.clientWidth,H=el.stage.clientHeight;
     const px=nx*W,py=ny*H;const perfR=(0.055+aimBonus(S.up.aim))*W,goodR=(0.10+aimBonus(S.up.aim))*W;
     let best=null,bd=1e9;
@@ -462,7 +463,7 @@
   function buy(k){const u=UPG[k],lv=S.up[k];if(lv>=u.max)return;const cost=u.cost(lv);if(S.coins<cost){toast("金币不足","bad");return;}S.coins-=cost;S.up[k]=lv+1;sBuy();toast(u.name+" → Lv."+(lv+1)+"！","good");renderShop();renderHUD();save();}
 
   /* ---------- Events ---------- */
-  el.queue.addEventListener("click",e=>{const b=e.target.closest("[data-serve]");if(!b)return;const c=queue.find(q=>q.id==b.dataset.serve);if(!c||c.serving)return;if(surgery)return;if(S.fol<=0){toast("先采点毛囊再接诊吧","gold");}openPlant(c);});
+  el.queue.addEventListener("click",e=>{const b=e.target.closest("[data-serve]");if(!b)return;const c=queue.find(q=>q.id==b.dataset.serve);if(!c||c.serving)return;if(surgery)return;if(S.fol<=0){toast("先采点毛囊再接诊吧","gold");return;}openPlant(c);});
   el.shopList.addEventListener("click",e=>{const b=e.target.closest("[data-buy]");if(b)buy(b.dataset.buy);});
   const openShop=()=>{renderShop();el.shopOverlay.classList.add("show");};
   $("shopBtn").addEventListener("click",openShop);
