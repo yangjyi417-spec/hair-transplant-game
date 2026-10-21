@@ -144,15 +144,67 @@
   .toast.good{background:var(--good);} .toast.bad{background:var(--bad);} .toast.gold{background:var(--accent); color:#3a2a06;}
   .mute{background:rgba(255,255,255,.2); border:none; color:#fff; width:30px; height:30px; border-radius:9px; cursor:pointer; font-size:14px;}
   .confetti{position:fixed; top:-12px; width:9px; height:14px; z-index:80; pointer-events:none; animation:fall linear forwards;}
-  @keyframes fall{to{transform:translateY(105vh) rotate(720deg); opacity:.9;}}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg); opacity:.9;}}  /* Title tag + topbar icon buttons */
+  .title-tag{font-size:11px; font-weight:700; background:rgba(255,255,255,.18); border-radius:999px; padding:2px 8px; margin-left:2px;}
+  .iconbtn{position:relative; background:rgba(255,255,255,.2); border:none; color:#fff; width:30px; height:30px; border-radius:9px; cursor:pointer; font-size:14px;}
+  .badge{position:absolute; top:-5px; right:-5px; min-width:15px; height:15px; padding:0 3px; background:var(--bad); color:#fff; border-radius:999px; font-size:9.5px; font-weight:800; line-height:15px; display:none; align-items:center; justify-content:center; box-shadow:0 0 0 1.5px var(--brand);}
+  .perk{font-size:11px; opacity:.92; background:rgba(255,255,255,.12); border-radius:10px; padding:5px 9px; line-height:1.35;}
+
+  /* VIP customer */
+  .cust.vip{border-color:#e6b84d; box-shadow:0 0 0 1px #e6b84d, 0 6px 18px rgba(230,184,77,.28); background:linear-gradient(180deg,#fffaf0,#fff);}
+  .tag.vip{background:#fbe6b0; color:#8a5a12;}
+  .rbonus{flex-basis:100%; text-align:center; font-size:12px; font-weight:800; color:var(--accent); background:#fff6e6; border-radius:10px; padding:5px 8px; margin-top:2px;}
+
+  /* Event banner */
+  .evbanner{position:fixed; top:190px; left:50%; transform:translateX(-50%) translateY(-24px); z-index:65; display:flex; align-items:center; gap:9px;
+    background:#2b2016; color:#fff; padding:9px 14px 9px 10px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,.28); max-width:92%;
+    opacity:0; pointer-events:none; transition:all .35s cubic-bezier(.2,.9,.3,1.2);}
+  .evbanner.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  .ev-ico{font-size:22px; line-height:1;}
+  .ev-txt{display:flex; flex-direction:column; line-height:1.25;}
+  .ev-txt b{font-size:13px;} .ev-txt span{font-size:11.5px; opacity:.9;}
+
+  /* Level-up card */
+  #levelOverlay{align-items:center;}
+  .lvcard{background:var(--card); width:calc(100% - 40px); max-width:340px; border-radius:22px; padding:22px 20px; text-align:center; box-shadow:var(--shadow); animation:up .3s ease;}
+  .lvhead{display:flex; align-items:center; justify-content:center; gap:12px; font-weight:900; font-size:22px; color:var(--sub);}
+  .lvhead .to{color:var(--brand);} .lvhead .arrow{color:var(--accent); font-size:18px;}
+  .lvtitle{font-size:18px; font-weight:900; margin:6px 0 4px;}
+  .lvbonus{display:inline-block; font-size:13px; font-weight:800; color:#8a5a12; background:#fbe6b0; border-radius:999px; padding:4px 12px; margin-bottom:10px;}
+  .lvunlocks .lvsub{font-size:12.5px; color:var(--sub); margin-bottom:7px;}
+  .lvchip{display:inline-block; background:#eef4f1; color:var(--brand); font-size:12px; font-weight:800; border-radius:9px; padding:5px 10px; margin:3px;}
+
+  /* Quests */
+  .quest{border:1px solid var(--line); border-radius:14px; padding:11px 12px; margin-bottom:10px; background:#fbfdfc;}
+  .quest .qn{font-size:13.5px; font-weight:800; margin-bottom:7px;}
+  .qbar{height:8px; background:var(--line); border-radius:999px; overflow:hidden; margin-bottom:7px;}
+  .qbar > i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--brand2),var(--perfect)); border-radius:999px; transition:width .3s;}
+  .qrow{display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--sub);}
+  .qrow .qp{font-weight:800; color:var(--ink);}
+  .qrow .qrw{flex:1;}
+  .qbtn{background:var(--brand); color:#fff; border:none; border-radius:9px; padding:6px 12px; font-size:12px; font-weight:800; cursor:pointer; flex:none;}
+  .qbtn:disabled{background:#cdd6d2; color:#8a978f;}
+  .quest.claimed{opacity:.55;}
+
+  /* Achievements */
+  .ach{display:flex; align-items:center; gap:11px; border:1px solid var(--line); border-radius:14px; padding:10px 12px; margin-bottom:9px; background:#fbfdfc;}
+  .ach-ico{font-size:22px; width:38px; text-align:center; flex:none; filter:grayscale(1); opacity:.5;}
+  .ach-g{flex:1; min-width:0;}
+  .ach-n{font-size:13.5px; font-weight:800;}
+  .ach-d{font-size:11.5px; color:var(--sub);}
+  .ach-t{font-size:11px; font-weight:800; color:#8a5a12; background:#fbe6b0; border-radius:999px; padding:2px 9px; flex:none;}
+  .ach.on{border-color:#e6b84d; background:linear-gradient(180deg,#fffaf0,#fff);}
+  .ach.on .ach-ico{filter:none; opacity:1;}
 </style>
 </head>
 <body>
 <div class="app" id="app">
   <div class="topbar">
     <div class="title-row">
-      <div class="shop-name">💉 植发整蛊店 <span class="lv-badge" id="lvBadge">Lv.1</span></div>
+      <div class="shop-name">💉 植发整蛊店 <span class="lv-badge" id="lvBadge">Lv.1</span><span class="title-tag" id="titleTag"></span></div>
       <div style="display:flex;gap:6px;align-items:center;">
+        <button class="iconbtn" id="questBtn">📋<span class="badge" id="questBadge"></span></button>
+        <button class="iconbtn" id="achBtn">🏆<span class="badge" id="achBadge"></span></button>
         <button class="mute" id="muteBtn">🔊</button>
         <button class="reset" id="resetBtn">重开</button>
       </div>
@@ -163,6 +215,7 @@
       <div class="stat"><div class="v" id="rep">0</div><div class="k">⭐ 声望</div></div>
     </div>
     <div class="rep-wrap"><span>升级</span><div class="rep-bar"><div class="rep-fill" id="repFill"></div></div><span id="repNext"></span></div>
+    <div class="perk" id="perkLine"></div>
   </div>
 
   <div class="section-title">👥 候诊区 <span id="queueNote"></span></div>
@@ -216,20 +269,55 @@
   </div>
 </div>
 
+<!-- Event banner -->
+<div class="evbanner" id="evBanner"></div>
+
+<!-- Level up -->
+<div class="overlay" id="levelOverlay">
+  <div class="lvcard">
+    <div class="lvhead"><span id="lvFrom">Lv.1</span><span class="arrow">➜</span><span id="lvTo" class="to">Lv.2</span></div>
+    <div class="lvtitle">🎉 诊所升级！</div>
+    <div class="lvbonus" id="lvBonus"></div>
+    <div class="lvunlocks" id="lvUnlocks"></div>
+    <button class="btn" style="width:100%;margin-top:14px;" data-close="levelOverlay">继续营业 →</button>
+  </div>
+</div>
+
+<!-- Quests -->
+<div class="overlay" id="questOverlay">
+  <div class="sheet">
+    <h3>📋 每日任务 <button class="close" data-close="questOverlay">✕</button></h3>
+    <p class="hint">每天刷新三个小目标，完成点「领取」拿金币和声望。</p>
+    <div id="questList"></div>
+  </div>
+</div>
+
+<!-- Achievements -->
+<div class="overlay" id="achOverlay">
+  <div class="sheet">
+    <h3>🏆 成就墙 <button class="close" data-close="achOverlay">✕</button></h3>
+    <p class="hint" id="achTitle"></p>
+    <div id="achList"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 (function(){
   "use strict";
-  const DEF={coins:60,fol:30,rep:0,level:1,muted:false,served:0,best:0,up:{harvester:1,aim:1,marketing:1,tech:1}};
+  const DEF={coins:60,fol:30,rep:0,level:1,muted:false,served:0,best:0,
+    totalCoins:0,threeStar:0,zeroMiss:0,perfectRuns:0,harvests:0,vipDone:0,designsSeen:[],title:"",
+    ach:{},quests:null,up:{harvester:1,aim:1,marketing:1,tech:1}};
   let S=load();
+  let EV={nextCoinX:1,nextCoinLeft:0,nextRepX:1,nextRepLeft:0,harvX:1,harvLeft:0};
 
   const REP_PER_LEVEL=l=>50+(l-1)*40;
   const yieldFol=l=>25+(l-1)*12;
   const harvestTime=l=>Math.max(500,1600-(l-1)*160);
   const consumeCostMult=l=>Math.max(0.4,1-(l-1)*0.08);
-  const harvestCost=()=>Math.max(3,Math.round(10*consumeCostMult(S.up.tech)));
-  const aimBonus=l=>(l-1)*0.012;          // 准星容差(归一化)
+  const harvestCost=()=>{let c=Math.max(3,Math.round(10*consumeCostMult(S.up.tech)));if(EV.harvLeft>0)c=Math.round(c*EV.harvX);return c;};
+  const aimBonus=l=>(l-1)*0.02;          // 准星容差(归一化)
   const rewardMult=l=>1+(l-1)*0.18;
   const patienceBonus=l=>(l-1)*3;
   const techRepBonus=l=>(l-1);
@@ -265,7 +353,10 @@
     plantOverlay:$("plantOverlay"),stage:$("stage"),head:$("head"),hairBase:$("hairBase"),surgFol:$("surgFol"),surgLeft:$("surgLeft"),combo:$("combo"),
     plantedFill:$("plantedFill"),progTxt:$("progTxt"),surgTitle:$("surgTitle"),surgHint:$("surgHint"),
     resultOverlay:$("resultOverlay"),stars:$("stars"),rline:$("rline"),rewardBig:$("rewardBig"),rstats:$("rstats"),nextBtn:$("nextBtn"),
-    shopOverlay:$("shopOverlay"),shopList:$("shopList"),toast:$("toast"),muteBtn:$("muteBtn"),app:$("app")};
+    shopOverlay:$("shopOverlay"),shopList:$("shopList"),toast:$("toast"),muteBtn:$("muteBtn"),app:$("app"),
+    perkLine:$("perkLine"),titleTag:$("titleTag"),questBadge:$("questBadge"),achBadge:$("achBadge"),
+    levelOverlay:$("levelOverlay"),lvFrom:$("lvFrom"),lvTo:$("lvTo"),lvBonus:$("lvBonus"),lvUnlocks:$("lvUnlocks"),
+    evBanner:$("evBanner"),questOverlay:$("questOverlay"),questList:$("questList"),achOverlay:$("achOverlay"),achList:$("achList"),achTitle:$("achTitle")};
 
   let toastT=null;
   function toast(m,k){el.toast.textContent=m;el.toast.className="toast show"+(k?" "+k:"");clearTimeout(toastT);toastT=setTimeout(()=>el.toast.className="toast",1500);}
@@ -276,6 +367,8 @@
     el.repFill.style.width=Math.min(100,S.rep/need*100)+"%";el.repNext.textContent=S.rep+"/"+need;
     el.harvestYield.textContent="花"+harvestCost()+"💰 +"+yieldFol(S.up.harvester)+"🌱";
     el.harvestBtn.disabled=S.coins<harvestCost()||harvesting;
+    el.perkLine.textContent=perkText();
+    el.titleTag.textContent=S.title?("· "+S.title):"";
     if(surgery)el.surgFol.textContent=Math.floor(S.fol);
   }
 
@@ -290,28 +383,28 @@
   function rings(cx,cy,radii,per){const o=[];radii.forEach(R=>{for(let i=0;i<per;i++){const a=Math.PI*2*i/per;o.push([cx+R*Math.cos(a),cy+R*Math.sin(a)*0.92]);}});return o;}
 
   const DESIGNS={
-    hairline:{label:"自然发际线",pts:()=>arc(0.5,0.62,0.42,0.46,Math.PI*1.12,Math.PI*1.88,16)},
-    mpeak:{label:"M字美人尖",pts:()=>poly([[0.14,0.22],[0.30,0.14],[0.42,0.24],[0.50,0.12],[0.58,0.24],[0.70,0.14],[0.86,0.22]],18)},
-    heart:{label:"爱心刘海💗",pts:()=>heart(22)},
-    star:{label:"五角星⭐",pts:()=>star(0.5,0.30,0.26,0.11,20)},
-    mohawk:{label:"莫西干朋克",pts:()=>line(0.5,0.10,0.5,0.50,16)},
-    bolt:{label:"闪电⚡",pts:()=>poly([[0.60,0.10],[0.40,0.30],[0.54,0.30],[0.38,0.52]],16)},
-    ring:{label:"佛顶光环",pts:()=>arc(0.5,0.30,0.22,0.24,0,Math.PI*2,18)},
-    question:{label:"问号脸❓",pts:()=>arc(0.5,0.20,0.13,0.11,Math.PI*0.15,Math.PI*1.35,10).concat(line(0.5,0.31,0.5,0.42,4)).concat([[0.5,0.50]])},
-    yen:{label:"¥暴富",pts:()=>poly([[0.38,0.10],[0.50,0.26],[0.62,0.10]],8).concat(line(0.50,0.26,0.50,0.52,7)).concat(line(0.40,0.34,0.60,0.34,4)).concat(line(0.40,0.42,0.60,0.42,4))},
-    brow:{label:"霸气连心眉",pts:()=>arc(0.5,0.40,0.34,0.16,Math.PI*1.15,Math.PI*1.85,16)},
-    qr:{label:"扫码剃度🧊",pts:()=>grid(0.30,0.12,0.70,0.48,5,5)},
-    barcode:{label:"条形码",pts:()=>{let o=[];for(let c=0;c<6;c++){const x=0.24+0.52*c/5;o=o.concat(line(x,0.13,x,0.46,4));}return o;}},
-    bullseye:{label:"靶心🎯",pts:()=>rings(0.5,0.30,[0.05,0.15,0.25],10)},
-    bow:{label:"蝴蝶结🎀",pts:()=>poly([[0.5,0.30],[0.24,0.16],[0.24,0.44],[0.5,0.30],[0.76,0.16],[0.76,0.44],[0.5,0.30]],18)},
-    check:{label:"已到账✓",pts:()=>line(0.26,0.30,0.42,0.46,6).concat(line(0.42,0.46,0.76,0.14,9))},
-    arrow:{label:"箭头指财路",pts:()=>line(0.20,0.32,0.72,0.32,10).concat(line(0.72,0.32,0.56,0.18,4)).concat(line(0.72,0.32,0.56,0.46,4))},
-    crown:{label:"王冠👑",pts:()=>poly([[0.20,0.46],[0.20,0.18],[0.35,0.32],[0.50,0.14],[0.65,0.32],[0.80,0.18],[0.80,0.46]],18)},
-    wave:{label:"大波浪",pts:()=>{const o=[];for(let i=0;i<18;i++){const t=i/17;o.push([0.16+0.68*t,0.28+0.10*Math.sin(t*Math.PI*3)]);}return o;}},
-    three:{label:"三根毛",pts:()=>[[0.40,0.22],[0.50,0.16],[0.60,0.22]]},
-    six:{label:"六六大顺",pts:()=>arc(0.5,0.36,0.12,0.13,0,Math.PI*2,10).concat(arc(0.5,0.32,0.15,0.19,Math.PI*1.35,Math.PI*1.95,6))},
-    cross:{label:"挂号中",pts:()=>line(0.5,0.12,0.5,0.48,10).concat(line(0.30,0.30,0.70,0.30,8))},
-    mustache:{label:"八字胡",pts:()=>arc(0.36,0.22,0.16,0.14,Math.PI*0.05,Math.PI*0.95,9).concat(arc(0.64,0.22,0.16,0.14,Math.PI*0.05,Math.PI*0.95,9))}
+    hairline:{label:"自然发际线",lv:1,pts:()=>arc(0.5,0.62,0.42,0.46,Math.PI*1.12,Math.PI*1.88,16)},
+    mpeak:{label:"M字美人尖",lv:1,pts:()=>poly([[0.14,0.22],[0.30,0.14],[0.42,0.24],[0.50,0.12],[0.58,0.24],[0.70,0.14],[0.86,0.22]],18)},
+    heart:{label:"爱心刘海💗",lv:1,pts:()=>heart(22)},
+    star:{label:"五角星⭐",lv:2,pts:()=>star(0.5,0.30,0.26,0.11,20)},
+    mohawk:{label:"莫西干朋克",lv:1,pts:()=>line(0.5,0.10,0.5,0.50,16)},
+    bolt:{label:"闪电⚡",lv:1,pts:()=>poly([[0.60,0.10],[0.40,0.30],[0.54,0.30],[0.38,0.52]],16)},
+    ring:{label:"佛顶光环",lv:2,pts:()=>arc(0.5,0.30,0.22,0.24,0,Math.PI*2,18)},
+    question:{label:"问号脸❓",lv:2,pts:()=>arc(0.5,0.20,0.13,0.11,Math.PI*0.15,Math.PI*1.35,10).concat(line(0.5,0.31,0.5,0.42,4)).concat([[0.5,0.50]])},
+    yen:{label:"¥暴富",lv:3,pts:()=>poly([[0.38,0.10],[0.50,0.26],[0.62,0.10]],8).concat(line(0.50,0.26,0.50,0.52,7)).concat(line(0.40,0.34,0.60,0.34,4)).concat(line(0.40,0.42,0.60,0.42,4))},
+    brow:{label:"霸气连心眉",lv:1,pts:()=>arc(0.5,0.40,0.34,0.16,Math.PI*1.15,Math.PI*1.85,16)},
+    qr:{label:"扫码剃度🧊",lv:5,pts:()=>grid(0.30,0.12,0.70,0.48,5,5)},
+    barcode:{label:"条形码",lv:5,pts:()=>{let o=[];for(let c=0;c<6;c++){const x=0.24+0.52*c/5;o=o.concat(line(x,0.13,x,0.46,4));}return o;}},
+    bullseye:{label:"靶心🎯",lv:4,pts:()=>rings(0.5,0.30,[0.05,0.15,0.25],10)},
+    bow:{label:"蝴蝶结🎀",lv:4,pts:()=>poly([[0.5,0.30],[0.24,0.16],[0.24,0.44],[0.5,0.30],[0.76,0.16],[0.76,0.44],[0.5,0.30]],18)},
+    check:{label:"已到账✓",lv:1,pts:()=>line(0.26,0.30,0.42,0.46,6).concat(line(0.42,0.46,0.76,0.14,9))},
+    arrow:{label:"箭头指财路",lv:1,pts:()=>line(0.20,0.32,0.72,0.32,10).concat(line(0.72,0.32,0.56,0.18,4)).concat(line(0.72,0.32,0.56,0.46,4))},
+    crown:{label:"王冠👑",lv:3,pts:()=>poly([[0.20,0.46],[0.20,0.18],[0.35,0.32],[0.50,0.14],[0.65,0.32],[0.80,0.18],[0.80,0.46]],18)},
+    wave:{label:"大波浪",lv:1,pts:()=>{const o=[];for(let i=0;i<18;i++){const t=i/17;o.push([0.16+0.68*t,0.28+0.10*Math.sin(t*Math.PI*3)]);}return o;}},
+    three:{label:"三根毛",lv:1,pts:()=>[[0.40,0.22],[0.50,0.16],[0.60,0.22]]},
+    six:{label:"六六大顺",lv:3,pts:()=>arc(0.5,0.36,0.12,0.13,0,Math.PI*2,10).concat(arc(0.5,0.32,0.15,0.19,Math.PI*1.35,Math.PI*1.95,6))},
+    cross:{label:"挂号中",lv:1,pts:()=>line(0.5,0.12,0.5,0.48,10).concat(line(0.30,0.30,0.70,0.30,8))},
+    mustache:{label:"八字胡",lv:2,pts:()=>arc(0.36,0.22,0.16,0.14,Math.PI*0.05,Math.PI*0.95,9).concat(arc(0.64,0.22,0.16,0.14,Math.PI*0.05,Math.PI*0.95,9))}
   };
   const DKEYS=Object.keys(DESIGNS);
   function clean(pts){const o=[];for(const p of pts){if(!o.some(q=>Math.hypot(q[0]-p[0],q[1]-p[1])<0.014))o.push(p);}return o;}
@@ -320,33 +413,46 @@
   const NAME_ADJ=["秃头焦虑的","发际线后移的","爱美的","较真的","要上热搜的","社恐的","挑剔的","爱吹水的","要相亲的","搞说唱的"];
   const NAME_NOUN=["程序员","设计师","网红","考研生","主播","司机","老师","销售","健身教练","Tony老师","脱口秀演员","电竞选手"];
   const RAINBOW=["#ff5d5d","#ffb020","#ffe94a","#4ade80","#38bdf8","#a78bfa","#f472b6"];
+  const VIP_ADJ=["挥金如土的","要上封面的","豪掷千金的","要包场的","明星","顶流","不差钱的"];
   let queue=[],custSeq=0;
   const maxQueue=()=>3+Math.floor(S.level/2);
   const spawnInterval=()=>Math.max(2600,6000-S.level*350-(S.up.marketing-1)*450);
 
   function makeCust(){
-    const kind=DKEYS[Math.floor(Math.random()*DKEYS.length)];
+    const unlocked=DKEYS.filter(k=>DESIGNS[k].lv<=S.level);
+    const vip=S.level>=2&&Math.random()<Math.min(0.26,0.05+S.level*0.025);
+    let kind;
+    if(vip){
+      const rich=unlocked.filter(k=>clean(DESIGNS[k].pts()).length>=12);
+      const pool=rich.length?rich:unlocked;
+      kind=pool[Math.floor(Math.random()*pool.length)];
+    }else{
+      kind=unlocked[Math.floor(Math.random()*unlocked.length)];
+    }
+    if(!S.designsSeen.includes(kind))S.designsSeen.push(kind);
     const pts=clean(DESIGNS[kind].pts());
     const need=pts.length;
-    const reward=Math.round(need*(4+S.level*0.9)*rewardMult(S.up.marketing));
-    const patience=20+need*0.5+patienceBonus(S.up.marketing);
-    const rainbow=Math.random()<0.28;
-    const shake=S.level>=3&&Math.random()<0.4;
-    return{id:++custSeq,name:NAME_ADJ[Math.floor(Math.random()*NAME_ADJ.length)]+NAME_NOUN[Math.floor(Math.random()*NAME_NOUN.length)],
-      kind,pts,need,reward,patience,time:patience,serving:false,rainbow,shake};
+    let reward=Math.round(need*(4+S.level*0.9)*rewardMult(S.up.marketing));
+    let patience=20+need*0.5+patienceBonus(S.up.marketing);
+    if(vip){reward=Math.round(reward*2.6);patience=Math.round(patience*0.82);}
+    const rainbow=vip?true:Math.random()<0.28;
+    const shake=S.level>=3&&Math.random()<(vip?0.6:0.4);
+    const adj=vip?VIP_ADJ:NAME_ADJ;
+    return{id:++custSeq,name:adj[Math.floor(Math.random()*adj.length)]+NAME_NOUN[Math.floor(Math.random()*NAME_NOUN.length)],
+      kind,pts,need,reward,patience,time:patience,serving:false,rainbow,shake,vip};
   }
 
   function thumbHTML(c){
     const box=[];const sc=0.9;c.pts.forEach(p=>{box.push(`<span class="mini" style="left:${(p[0]*100).toFixed(0)}%;top:${(p[1]*100*sc).toFixed(0)}%"></span>`);});
-    return `<div class="thumb">${box.join("")}<span class="em">${c.rainbow?"🌈":c.shake?"😵‍💫":"🙂"}</span></div>`;
+    return `<div class="thumb">${box.join("")}<span class="em">${c.vip?"👑":c.rainbow?"🌈":c.shake?"😵‍💫":"🙂"}</span></div>`;
   }
   function renderQueue(){
     if(!queue.length){el.queue.innerHTML='<div class="empty">🕐 暂无顾客。先去「采发」备点毛囊，客人马上来。</div>';el.queueNote.textContent="";return;}
     el.queueNote.textContent=queue.length+"/"+maxQueue();
     el.queue.innerHTML=queue.map(c=>{
       const pct=Math.max(0,c.time/c.patience*100),col=pct>50?"var(--good)":pct>25?"var(--accent)":"var(--bad)";
-      const tags=`<span class="tag">${DESIGNS[c.kind].label}</span>${c.rainbow?'<span class="tag">🌈彩色</span>':''}${c.shake?'<span class="tag shake">😵‍手抖</span>':''}`;
-      return `<div class="cust" data-id="${c.id}">${thumbHTML(c)}
+      const tags=`<span class="tag">${DESIGNS[c.kind].label}</span>${c.vip?'<span class="tag vip">👑VIP大单</span>':''}${c.rainbow?'<span class="tag">🌈彩色</span>':''}${c.shake?'<span class="tag shake">😵‍手抖</span>':''}`;
+      return `<div class="cust${c.vip?' vip':''}" data-id="${c.id}">${thumbHTML(c)}
         <div class="cust-info"><div class="cust-name">${c.name}</div>
         <div class="cust-meta"><span>需 <b>${c.need}</b>🌱</span><span>付 <b>${c.reward}</b>💰</span></div>
         <div>${tags}</div><div class="patience"><i style="width:${pct}%;background:${col}"></i></div></div>
@@ -359,9 +465,9 @@
   let harvesting=false;
   function doHarvest(){
     if(harvesting)return;const cost=harvestCost();if(S.coins<cost){toast("金币不够采发啦","bad");return;}
-    S.coins-=cost;harvesting=true;renderHUD();
+    S.coins-=cost;harvesting=true;if(EV.harvLeft>0){EV.harvLeft--;if(EV.harvLeft<=0)EV.harvX=1;}renderHUD();
     const total=harvestTime(S.up.harvester),start=performance.now();let done=false;
-    function finish(){if(done)return;done=true;const got=yieldFol(S.up.harvester);S.fol+=got;harvesting=false;el.harvestProg.style.width="0%";sHarv();toast("采发完成 +"+got+"🌱","good");renderHUD();save();}
+    function finish(){if(done)return;done=true;const got=yieldFol(S.up.harvester);S.fol+=got;harvesting=false;S.harvests++;el.harvestProg.style.width="0%";sHarv();toast("采发完成 +"+got+"🌱","good");questEvent("harvest",got);renderHUD();save();}
     (function step(){if(done)return;const p=Math.min(1,(performance.now()-start)/total);el.harvestProg.style.width=p*100+"%";if(p<1)requestAnimationFrame(step);else finish();})();
     setTimeout(finish,total+150);
   }
@@ -375,9 +481,11 @@
     el.head.className="head";
     el.hairBase.style.background = c.rainbow ? RAINBOW[Math.floor(Math.random()*RAINBOW.length)] : "#3a2c20";
     el.stage.classList.toggle("wob",!!c.shake);
-    // render sockets
-    surgery.sockets.forEach(s=>{const d=document.createElement("div");d.className="socket";d.style.left=s.x*100+"%";d.style.top=s.y*100+"%";el.stage.appendChild(d);s.el=d;});
-    el.surgTitle.textContent="🩺 "+DESIGNS[c.kind].label+" · "+c.name;
+    // render sockets (size reflects aim upgrade's PERFECT radius)
+    const SW=el.stage.clientWidth||230;
+    const prPx=Math.min(0.15,0.055+aimBonus(S.up.aim))*SW*2;
+    surgery.sockets.forEach(s=>{const d=document.createElement("div");d.className="socket";d.style.left=s.x*100+"%";d.style.top=s.y*100+"%";const sz=Math.max(15,Math.round(prPx));d.style.width=sz+"px";d.style.height=sz+"px";el.stage.appendChild(d);s.el=d;});
+    el.surgTitle.textContent=(c.vip?"👑 ":" ")+DESIGNS[c.kind].label+" · "+c.name;
     el.surgHint.textContent=c.shake?"顾客手抖，头皮会晃！稳住，对准虚线圈点。":"照着虚线圈，一根根精准点下去！点得越准分越高。";
     el.combo.textContent="";
     updateSurg();
@@ -396,7 +504,7 @@
     if(!surgery)return;const c=surgery.cust;if(surgery.filled>=c.need)return;
     if(S.fol<=0){toast("毛囊用完啦，先去采发再种","bad");return;}
     const W=el.stage.clientWidth,H=el.stage.clientHeight;
-    const px=nx*W,py=ny*H;const perfR=(0.055+aimBonus(S.up.aim))*W,goodR=(0.10+aimBonus(S.up.aim))*W;
+    const px=nx*W,py=ny*H;const perfR=Math.min(0.15,0.055+aimBonus(S.up.aim))*W,goodR=Math.min(0.22,0.10+aimBonus(S.up.aim))*W;
     let best=null,bd=1e9;
     for(const s of surgery.sockets){if(s.filled)continue;const d=Math.hypot(s.x*W-px,s.y*H-py);if(d<bd){bd=d;best=s;}}
     if(!best||bd>goodR){ // miss
@@ -428,25 +536,46 @@
     el.head.className="head win";
     const acc=(surgery.perfect+0.5*surgery.good)/c.need;
     const stars=acc>=0.82&&surgery.miss<=1?3:acc>=0.6?2:1;
-    const payout=Math.round(c.reward*(0.5+0.5*acc)*(1+surgery.maxCombo*0.03*comboBonus(S.up.tech)));
-    const repGain=stars+techRepBonus(S.up.tech)+(stars===3?2:0);
-    S.coins+=payout;S.rep+=repGain;S.served++;S.best=Math.max(S.best,surgery.maxCombo);
+    let payout=Math.round(c.reward*(0.5+0.5*acc)*(1+surgery.maxCombo*0.03*comboBonus(S.up.tech)));
+    let repGain=stars+techRepBonus(S.up.tech)+(stars===3?2:0);
+    const bonus={};
+    if(c.vip){repGain+=3;const tip=Math.round(c.reward*0.25);payout+=tip;bonus.tip=tip;}
+    if(EV.nextCoinLeft>0){payout=Math.round(payout*EV.nextCoinX);bonus.coinX=EV.nextCoinX;EV.nextCoinLeft--;if(EV.nextCoinLeft<=0)EV.nextCoinX=1;}
+    if(EV.nextRepLeft>0){repGain=Math.round(repGain*EV.nextRepX);bonus.repX=EV.nextRepX;EV.nextRepLeft--;if(EV.nextRepLeft<=0)EV.nextRepX=1;}
+    S.coins+=payout;S.rep+=repGain;S.served++;S.totalCoins+=payout;S.best=Math.max(S.best,surgery.maxCombo);
+    if(stars===3)S.threeStar++;
+    if(surgery.miss===0)S.zeroMiss++;
+    if(acc>=0.999)S.perfectRuns++;
+    if(c.vip){S.vipDone++;}
     queue=queue.filter(q=>q.id!==c.id);
     el.plantOverlay.classList.remove("show");
-    showResult(stars,acc,payout,repGain);
+    showResult(stars,acc,payout,repGain,c,bonus);
+    questEvent("serve",1);
+    if(stars===3)questEvent("threestar",1);
+    questEvent("combo",surgery.maxCombo);
+    if(surgery.miss===0)questEvent("zeromiss",1);
+    if(acc>=0.999)questEvent("perfect",1);
+    if(c.vip)questEvent("vip",1);
+    checkAch();
     checkLevel();renderHUD();renderQueue();save();surgery=null;
   }
-  function showResult(stars,acc,payout,repGain){
+  function showResult(stars,acc,payout,repGain,c,bonus){
+    c=c||{};bonus=bonus||{};
     const lines={
       3:["镜子呢？我要反复欣赏！","这发际线，绝了！","Tony老师看了沉默。","直接可以出道了！"],
       2:["不错不错，挺自然的~","能看能看，值这个价。","嗯，比隔壁店强。"],
       1:["呃…好像哪里怪怪的？","行吧，戴帽子能救。","下次…下次一定更好。"]};
-    el.rline.textContent="「"+lines[stars][Math.floor(Math.random()*lines[stars].length)]+"」";
-    el.rewardBig.textContent="+"+payout+" 💰";
+    const vipLines=["VIP就是VIP，排面拉满！","这钱花得值，回头带整个团来！","经纪人看了想再订十单！","发丝间都是金钱的味道~"];
+    const pool=c.vip?vipLines:lines[stars];
+    el.rline.textContent="「"+pool[Math.floor(Math.random()*pool.length)]+"」";
+    el.rewardBig.textContent="+"+payout+" 💰"+(bonus.tip?"（含小费 "+bonus.tip+"）":"");
     [...el.stars.children].forEach((s,i)=>{s.classList.toggle("on",i<stars);s.style.animationDelay=(i*0.12)+"s";if(i<stars)sStar(i);});
+    let extra="";
+    if(bonus.coinX)extra+="🤳 网红加成 ×"+bonus.coinX+"　";
+    if(bonus.repX)extra+="⭐ 声望加成 ×"+bonus.repX+"　";
     el.rstats.innerHTML=`<div class="rstat"><div class="rv">${Math.round(acc*100)}%</div><div class="rk">精准度</div></div>
       <div class="rstat"><div class="rv">x${surgery?surgery.maxCombo:S.best}</div><div class="rk">最高连击</div></div>
-      <div class="rstat"><div class="rv">+${repGain}</div><div class="rk">声望</div></div>`;
+      <div class="rstat"><div class="rv">+${repGain}</div><div class="rk">声望</div></div>`+(extra?`<div class="rbonus">${extra}</div>`:"");
     el.resultOverlay.classList.add("show");
     if(stars===3)confetti();
   }
@@ -455,12 +584,136 @@
   function abandon(){if(!surgery)return;surgery.cust.serving=false;surgery=null;el.stage.classList.remove("wob");el.plantOverlay.classList.remove("show");renderQueue();save();}
   function failOrder(c){queue=queue.filter(q=>q.id!==c.id);S.rep=Math.max(0,S.rep-3);if(surgery&&surgery.cust.id===c.id){surgery=null;el.plantOverlay.classList.remove("show");}sFail();toast(c.name+" 等太久，跑路了 −3⭐","bad");renderHUD();renderQueue();save();}
 
-  function checkLevel(){let up=false;while(S.rep>=REP_PER_LEVEL(S.level)){S.rep-=REP_PER_LEVEL(S.level);S.level++;up=true;}if(up){sLvl();toast("🎉 诊所升到 Lv."+S.level+"！客人更挑剔也更舍得花钱","gold");}}
+  function checkLevel(){let up=false,from=S.level;while(S.rep>=REP_PER_LEVEL(S.level)){S.rep-=REP_PER_LEVEL(S.level);S.level++;up=true;}
+    if(up){sLvl();const bonus=S.level*20;S.coins+=bonus;S.totalCoins+=bonus;
+      const newD=DKEYS.filter(k=>DESIGNS[k].lv>from&&DESIGNS[k].lv<=S.level);
+      showLevelUp(from,S.level,newD,bonus);renderHUD();}}
 
   /* ---------- Shop ---------- */
   function renderShop(){el.shopList.innerHTML=Object.keys(UPG).map(k=>{const u=UPG[k],lv=S.up[k],maxed=lv>=u.max,cost=u.cost(lv);
     return `<div class="shop-item"><div class="ico">${u.ico}</div><div class="g"><div class="n">${u.name} <span class="lv">Lv.${lv}${maxed?" · MAX":""}</span></div><div class="d">${u.desc(lv)}</div>${maxed?"":`<div class="d" style="color:var(--brand2)">下一级：${u.desc(lv+1)}</div>`}</div>${maxed?'<button class="buy" disabled>满级</button>':`<button class="buy" data-buy="${k}" ${S.coins<cost?"disabled":""}>${cost}💰</button>`}</div>`;}).join("");}
   function buy(k){const u=UPG[k],lv=S.up[k];if(lv>=u.max)return;const cost=u.cost(lv);if(S.coins<cost){toast("金币不足","bad");return;}S.coins-=cost;S.up[k]=lv+1;sBuy();toast(u.name+" → Lv."+(lv+1)+"！","good");renderShop();renderHUD();save();}
+
+  /* ---------- Perks & Level-up ---------- */
+  function unlockedCount(){return DKEYS.filter(k=>DESIGNS[k].lv<=S.level).length;}
+  function nextUnlockLv(){const ls=DKEYS.map(k=>DESIGNS[k].lv).filter(l=>l>S.level);return ls.length?Math.min.apply(null,ls):null;}
+  function vipChance(){return S.level>=2?Math.min(0.26,0.05+S.level*0.025):0;}
+  function perkText(){
+    const nx=nextUnlockLv();
+    let s="🏅 Lv."+S.level+" 特权：队列 "+maxQueue()+" · 造型 "+unlockedCount()+"/"+DKEYS.length+" · VIP概率 "+Math.round(vipChance()*100)+"%";
+    if(S.level<2)s+=" · Lv.2 起出 VIP 大单";
+    else if(nx)s+=" · 升 Lv."+nx+" 解锁新造型";
+    return s;
+  }
+  function showLevelUp(from,to,newD,bonus){
+    el.lvFrom.textContent="Lv."+from;el.lvTo.textContent="Lv."+to;
+    el.lvBonus.textContent="🧧 升级红包 +"+bonus+" 💰";
+    el.lvUnlocks.innerHTML=newD.length?("<div class='lvsub'>🎊 解锁 "+newD.length+" 个新造型</div>"+newD.map(k=>'<span class="lvchip">'+DESIGNS[k].label+'</span>').join("")):"<div class='lvsub'>更高难度的客人与 VIP 大单持续来袭</div>";
+    el.levelOverlay.classList.add("show");
+  }
+
+  /* ---------- Random Events ---------- */
+  const EVENTS=[
+    {ico:"🤳",name:"网红探店",run(){EV.nextCoinX=2;EV.nextCoinLeft=1;return "网红来探店！下一单金币 ×2";}},
+    {ico:"⭐",name:"口碑发酵",run(){EV.nextRepX=2;EV.nextRepLeft=1;return "好评刷屏！下一单声望 ×2";}},
+    {ico:"📈",name:"毛囊涨价",run(){EV.harvX=2;EV.harvLeft=2;return "原料紧张！接下来 2 次采发费翻倍";}},
+    {ico:"🎁",name:"好评返现",run(){const g=Math.round(20+S.level*12);S.coins+=g;S.totalCoins+=g;S.rep+=2;return "顾客返图好评，+"+g+"💰 +2⭐";}},
+    {ico:"🐭",name:"老鼠偷毛囊",run(){const lost=Math.min(Math.floor(S.fol),Math.round(4+S.level));S.fol-=lost;return "仓库进老鼠，偷走 "+lost+"🌱 毛囊！";}},
+    {ico:"💸",name:"顾客加价",run(){const q=queue.filter(c=>!c.serving);if(!q.length)return "客人都还在犹豫，没谈成加价";const c=q[Math.floor(Math.random()*q.length)];const up=Math.random()<0.6;c.reward=Math.max(5,Math.round(c.reward*(up?1.4:0.75)));renderQueue();return c.name+(up?" 突然愿意多给 40%！":" 临时砍价 −25%…");}}
+  ];
+  let nextEvAt=performance.now()+22000;
+  function maybeEvent(now){
+    if(surgery)return;
+    if(now<nextEvAt)return;
+    nextEvAt=now+18000+Math.random()*16000;
+    const e=EVENTS[Math.floor(Math.random()*EVENTS.length)];
+    showEventBanner(e.ico,e.name,e.run());
+    renderHUD();renderQueue();save();
+  }
+  function showEventBanner(ico,name,msg){
+    el.evBanner.innerHTML=`<span class="ev-ico">${ico}</span><div class="ev-txt"><b>${name}</b><span>${msg}</span></div>`;
+    el.evBanner.classList.remove("show");void el.evBanner.offsetWidth;el.evBanner.classList.add("show");
+    clearTimeout(showEventBanner._t);showEventBanner._t=setTimeout(()=>el.evBanner.classList.remove("show"),4200);
+    beep(520,0.08,"triangle",0.10);
+  }
+
+  /* ---------- Daily Quests ---------- */
+  const QPOOL=[
+    {type:"serve",target:5,desc:"接诊并完成 5 位客人",reward:{coins:60,rep:6}},
+    {type:"serve",target:10,desc:"接诊并完成 10 位客人",reward:{coins:120,rep:12}},
+    {type:"threestar",target:3,desc:"拿下 3 个三星好评",reward:{coins:90,rep:10}},
+    {type:"combo",target:10,desc:"单局连击达到 x10",reward:{coins:80,rep:8}},
+    {type:"combo",target:15,desc:"单局连击达到 x15",reward:{coins:120,rep:12}},
+    {type:"zeromiss",target:1,desc:"完成一单全程零 MISS",reward:{coins:70,rep:8}},
+    {type:"perfect",target:1,desc:"完成一单 100% 精准",reward:{coins:100,rep:10}},
+    {type:"harvest",target:3,desc:"采发 3 次",reward:{coins:50,rep:5}},
+    {type:"vip",target:1,desc:"完成 1 个 VIP 大单",reward:{coins:120,rep:12}}
+  ];
+  const QMAX=new Set(["combo"]);
+  function todayStr(){const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+  function initQuests(){
+    const t=todayStr();
+    if(!S.quests||S.quests.date!==t){
+      const pool=QPOOL.slice(),list=[];
+      for(let i=0;i<3&&pool.length;i++){list.push(Object.assign({prog:0,done:false,claimed:false},pool.splice(Math.floor(Math.random()*pool.length),1)[0]));}
+      S.quests={date:t,list:list};save();
+    }
+  }
+  function questEvent(type,val){
+    if(!S.quests)return;let ch=false;
+    for(const q of S.quests.list){
+      if(q.done||q.type!==type)continue;
+      const v=val||1;
+      q.prog=QMAX.has(type)?Math.max(q.prog,v):q.prog+v;
+      if(q.prog>=q.target){q.prog=q.target;q.done=true;sStar(0);toast("📋 任务达成："+q.desc,"good");}
+      ch=true;
+    }
+    if(ch){renderQuests();save();}
+  }
+  function renderQuestBadge(){const n=S.quests?S.quests.list.filter(q=>q.done&&!q.claimed).length:0;el.questBadge.textContent=n;el.questBadge.style.display=n?"flex":"none";}
+  function renderQuests(){
+    if(!S.quests)initQuests();
+    el.questList.innerHTML=S.quests.list.map((q,i)=>{
+      const pct=Math.min(100,q.prog/q.target*100);
+      return `<div class="quest${q.claimed?' claimed':''}"><div class="qn">${q.desc}</div>
+        <div class="qbar"><i style="width:${pct}%"></i></div>
+        <div class="qrow"><span class="qp">${q.prog}/${q.target}</span><span class="qrw">🎁 ${q.reward.coins}💰 +${q.reward.rep}⭐</span>
+        ${q.claimed?'<button class="qbtn" disabled>已领</button>':`<button class="qbtn" data-claim="${i}" ${q.done?"":"disabled"}>${q.done?"领取":"进行中"}</button>`}</div></div>`;
+    }).join("");
+    renderQuestBadge();
+  }
+  function claimQuest(i){
+    const q=S.quests.list[i];if(!q||!q.done||q.claimed)return;
+    q.claimed=true;S.coins+=q.reward.coins;S.totalCoins+=q.reward.coins;S.rep+=q.reward.rep;
+    sBuy();toast("领取奖励 +"+q.reward.coins+"💰 +"+q.reward.rep+"⭐","gold");
+    checkLevel();renderQuests();renderHUD();save();
+  }
+
+  /* ---------- Achievements ---------- */
+  const ACH=[
+    {id:"first3",name:"初试锋芒",desc:"首次拿到三星好评",test:()=>S.threeStar>=1,tip:"三星常客"},
+    {id:"zeromiss",name:"零失误大师",desc:"完成一单全程零 MISS",test:()=>S.zeroMiss>=1,tip:"稳如老狗"},
+    {id:"perfect",name:"毫厘必争",desc:"完成一单 100% 精准",test:()=>S.perfectRuns>=1,tip:"精准狂魔"},
+    {id:"combo20",name:"连击之王",desc:"单局连击达到 x20",test:()=>S.best>=20,tip:"连击之王"},
+    {id:"vip5",name:"VIP 御用",desc:"完成 5 个 VIP 大单",test:()=>(S.vipDone||0)>=5,tip:"名流御用"},
+    {id:"rich",name:"百万诊所",desc:"累计赚取 1000💰",test:()=>S.totalCoins>=1000,tip:"财源广进"},
+    {id:"serve30",name:"桃李满门",desc:"累计服务 30 位客人",test:()=>S.served>=30,tip:"口碑名医"},
+    {id:"collector",name:"造型收藏家",desc:"见过全部 "+DKEYS.length+" 种造型",test:()=>S.designsSeen.length>=DKEYS.length,tip:"脑洞收藏家"},
+    {id:"lv5",name:"声名鹊起",desc:"诊所达到 Lv.5",test:()=>S.level>=5,tip:"业界新星"}
+  ];
+  function bestTitle(){const u=ACH.filter(a=>S.ach[a.id]);return u.length?u[u.length-1].tip:"";}
+  function checkAch(){
+    let any=false;
+    for(const a of ACH){if(!S.ach[a.id]&&a.test()){S.ach[a.id]=true;any=true;toast("🏆 成就解锁："+a.name,"gold");sStar(2);}}
+    if(any){const t=bestTitle();if(t)S.title=t;renderAchBadge();save();}
+  }
+  function renderAchBadge(){el.achBadge.textContent=ACH.filter(a=>S.ach[a.id]).length+"/"+ACH.length;}
+  function renderAch(){
+    el.achTitle.textContent=S.title?("当前称号："+S.title):"完成成就可解锁称号";
+    el.achList.innerHTML=ACH.map(a=>{const on=!!S.ach[a.id];
+      return `<div class="ach${on?' on':''}"><div class="ach-ico">${on?'🏆':'🔒'}</div><div class="ach-g"><div class="ach-n">${a.name}</div><div class="ach-d">${a.desc}</div></div>${on?`<span class="ach-t">${a.tip}</span>`:''}</div>`;}).join("");
+    renderAchBadge();
+  }
 
   /* ---------- Events ---------- */
   el.queue.addEventListener("click",e=>{const b=e.target.closest("[data-serve]");if(!b)return;const c=queue.find(q=>q.id==b.dataset.serve);if(!c||c.serving)return;if(surgery)return;if(S.fol<=0){toast("先采点毛囊再接诊吧","gold");return;}openPlant(c);});
@@ -472,6 +725,9 @@
   el.nextBtn.addEventListener("click",()=>el.resultOverlay.classList.remove("show"));
   el.muteBtn.addEventListener("click",()=>{S.muted=!S.muted;el.muteBtn.textContent=S.muted?"🔇":"🔊";if(!S.muted)sBuy();save();});
   $("resetBtn").addEventListener("click",()=>{if(confirm("确定重开？进度清空。")){S=JSON.parse(JSON.stringify(DEF));queue=[];surgery=null;el.plantOverlay.classList.remove("show");el.resultOverlay.classList.remove("show");el.shopOverlay.classList.remove("show");save();renderHUD();renderQueue();toast("已重开，冲！","gold");}});
+  $("questBtn").addEventListener("click",()=>{renderQuests();el.questOverlay.classList.add("show");});
+  $("achBtn").addEventListener("click",()=>{renderAch();el.achOverlay.classList.add("show");});
+  el.questList.addEventListener("click",e=>{const b=e.target.closest("[data-claim]");if(b)claimQuest(+b.dataset.claim);});
 
   /* ---------- Save ---------- */
   const KEY="hair-prank-v2";
@@ -484,13 +740,15 @@
     for(const c of queue.slice()){if(c.serving&&c!== (surgery&&surgery.cust))continue;c.time-=dt;if(c.time<=0){failOrder(c);}}
     tickBars();
     if(!surgery&&queue.length<maxQueue()&&(now-lastSpawn)>spawnInterval()){queue.push(makeCust());lastSpawn=now;renderQueue();}
+    maybeEvent(now);
     requestAnimationFrame(loop);
   }
 
   /* ---------- Boot ---------- */
   el.muteBtn.textContent=S.muted?"🔇":"🔊";
+  initQuests();
   queue.push(makeCust());
-  renderHUD();renderQueue();requestAnimationFrame(loop);
+  renderHUD();renderQueue();renderQuests();renderAch();requestAnimationFrame(loop);
   ["pointerdown","touchstart"].forEach(ev=>document.addEventListener(ev,()=>{const c=ac();if(c&&c.state==="suspended")c.resume();},{once:true}));
 })();
 </script>
